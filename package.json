@@ -7,7 +7,8 @@
     "dev": "vite",
     "staging": "vite --mode staging",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "mockserver": "json-graphql-server mock/graphql-server.json --p 4000"
   },
   "dependencies": {
     "@apollo/client": "3.6.9",
@@ -28,6 +29,7 @@
     "eslint-plugin-n": "15.0.0",
     "eslint-plugin-promise": "6.0.0",
     "eslint-plugin-react": "7.31.8",
+    "json-graphql-server": "2.3.2",
     "json-server": "0.17.0",
     "prettier": "2.5.1",
     "terser": "5.15.0",

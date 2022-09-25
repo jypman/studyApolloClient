@@ -1,0 +1,19 @@
+{
+  "todo": [
+    {
+      "id": 1,
+      "title": "아침 코딩",
+      "checked": 0
+    },
+    {
+      "id": 2,
+      "title": "점심 코딩",
+      "checked": 0
+    },
+    {
+      "id": 3,
+      "title": "저녁 코딩",
+      "checked": 0
+    }
+  ]
+}

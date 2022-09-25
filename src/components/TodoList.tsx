@@ -25,13 +25,14 @@ const TodoList = (): JSX.Element => {
         error ㅠㅠ retry??
       </span>
     );
+
   return (
     <div>
       <ol>
         {data.allTodos.map((todo: TodoListResponse) => (
           <li key={todo.id}>
             <span>{todo.title}</span>
-            <input type="checkbox" checked={todo.checked === 1} />
+            <input type="checkbox" defaultChecked={todo.checked === 1} />
           </li>
         ))}
       </ol>

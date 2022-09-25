@@ -15,5 +15,22 @@
       "title": "저녁 코딩",
       "checked": 0
     }
+  ],
+  "fruit": [
+    {
+      "id": 1,
+      "name": "apple",
+      "color": "red"
+    },
+    {
+      "id": 2,
+      "name": "banana",
+      "color": "yellow"
+    },
+    {
+      "id": 3,
+      "name": "orange",
+      "color": "orange"
+    }
   ]
 }

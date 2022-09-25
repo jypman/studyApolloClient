@@ -1,4 +1,4 @@
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, NetworkStatus } from "@apollo/client";
 import { TodoListResponse } from "../type/dataInterface";
 
 const TodoList = (): JSX.Element => {
@@ -12,7 +12,32 @@ const TodoList = (): JSX.Element => {
     }
   `;
 
-  const { loading, error, data, refetch } = useQuery(GET_TODO_LIST);
+  const GET_TODO = gql`
+    query GetTodo($requestId: ID!) {
+      Todo(id: $requestId) {
+        id
+        title
+        checked
+      }
+    }
+  `;
+
+  const { loading, error, data, refetch, networkStatus } = useQuery(GET_TODO, {
+    variables: { requestId: 1 },
+    notifyOnNetworkStatusChange: true, // refetch가 진행되는 동안 data를 사용하는 UI가 리렌더링되도록 하는 옵션
+  });
+
+  /**
+   * networkStatus :
+   * 1 -> loading
+   * 2 -> setVariables
+   * 3 -> fetchMore
+   * 4 -> refetch
+   * 6 -> poll
+   * 7 -> read,
+   * 8 -> error
+   * */
+  if (networkStatus === NetworkStatus.refetch) return <div>refetching...</div>;
 
   if (loading) return <div>loading...</div>;
 
@@ -20,22 +45,38 @@ const TodoList = (): JSX.Element => {
     return (
       <span
         style={{ cursor: "pointer", backgroundColor: "red", color: "white" }}
-        onClick={refetch}
       >
-        error ㅠㅠ retry??
+        error ㅠㅠ
       </span>
     );
 
   return (
     <div>
-      <ol>
-        {data.allTodos.map((todo: TodoListResponse) => (
-          <li key={todo.id}>
-            <span>{todo.title}</span>
-            <input type="checkbox" defaultChecked={todo.checked === 1} />
+      {[1, 2, 3].map((todoIndex) => (
+        <div key={todoIndex} style={{ marginBottom: "5px" }}>
+          <button
+            type="button"
+            onClick={() => refetch({ requestId: todoIndex })}
+          >
+            {todoIndex}번 todo 목록을 갖고 오고 싶으면 클릭!
+          </button>
+        </div>
+      ))}
+      <ul>
+        {data.allTodos &&
+          data.allTodos.map((todo: TodoListResponse) => (
+            <li key={todo.id}>
+              <span>{todo.title}</span>
+              <input type="checkbox" defaultChecked={todo.checked === 1} />
+            </li>
+          ))}
+        {data.Todo && (
+          <li key={data.Todo.id}>
+            <span>{data.Todo.title}</span>
+            <input type="checkbox" defaultChecked={data.Todo.checked === 1} />
           </li>
-        ))}
-      </ol>
+        )}
+      </ul>
     </div>
   );
 };

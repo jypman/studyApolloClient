@@ -24,7 +24,7 @@ const TodoList = (): JSX.Element => {
 
   const { loading, error, data, refetch, networkStatus } = useQuery(GET_TODO, {
     variables: { requestId: 1 },
-    notifyOnNetworkStatusChange: true, // refetch가 진행되는 동안 data를 사용하는 UI가 리렌더링되도록 하는 옵션
+    notifyOnNetworkStatusChange: true, // 현재 networkStatus를 확인할 수 있도록 하는 옵션
   });
 
   /**

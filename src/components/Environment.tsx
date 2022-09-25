@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import "../styles/color.scss";
 
 const Environment = (): JSX.Element => {
   const environmentKey = "BASE_URL";
